@@ -22,6 +22,12 @@ app.get('/api/posts' , function(request, response, next){
 
 });
 
+app.get('/', function(request, response){
+
+    response.sendfile('layouts/posts.html')
+
+})
+
 
 
 

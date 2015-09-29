@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app='app'>
 <head>
-    <link rel='stylesheet' href='css/bootstrap.css'>
+    <link rel='stylesheet' href='../css/bootstrap.css'>
 </head>
 <body>
 
@@ -36,13 +36,13 @@
 </div>
 
 
-<script src='node_modules/angular/angular.min.js'></script>
+<script src='../angular/angular.min.js'></script>
 
 
 
 <script>
     var app = angular.module('app', [])
-    app.controller('PostsCtrl', function ($scope) {
+    app.controller('PostsCtrl', function ($scope, $http) {
         $scope.addPost = function () {
             if ($scope.postBody) {
                 $scope.posts.unshift({
@@ -55,17 +55,17 @@
             }
         }
 
-        $scope.posts = [
-            {
-                username: 'dickeyxxx',
-                body: 'Node rules!'
-            },
-            {
-                username: 'jeffdickey',
-                body: 'been trying out angular.js...'
-            }
-        ]
-    })
+        $http.get('http://localhost:8888/api/posts').success(
+
+                function (posts){
+
+                    console.log('blir kalt');
+                    $scope.posts = posts
+
+                }
+        )}
+
+    )
 </script>
 </body>
 </html>
