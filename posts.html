@@ -46,9 +46,12 @@
         $scope.addPost = function () {
             if ($scope.postBody) {
                 $scope.posts.unshift({
-                    username: 'dickeyxxx',
+                    username: 'Erlend Westbye',
                     body: $scope.postBody
+
                 })
+
+                $scope.postBody = null;
             }
         }
 
