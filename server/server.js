@@ -1,56 +1,40 @@
 /**
- * Created by erlend on 22.09.2015.
+ * Created by erlend on 01.10.2015.
  */
 
 
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
-var Post = require('./models/posts.js');
+var express = require('express')
+var bodyparser = require('body-parser')
 
-app.use(bodyParser.json());
 
-app.get('/api/posts' , function(request, response, next){
+var app = express()
 
-    Post.find(function (error, posts){
 
-        if(error) {return next(error)}
+app.use(bodyparser.json())
 
-        response.json(posts)
+app.get('/api/posts', function(request, response){ /* husk å ha med forewardslash bruh*/
 
-    })
+    response.json(
 
-});
+        [{
 
-app.get('/', function(request, response){
+                username: 'erlendw',
+                post:'erlenderbest'
 
-    response.sendfile('layouts/posts.html')
+            }]
+
+    )})
+
+app.post('/api/posts/', function (request, response){
+
+    {
+
+        console.log('post recieved')
+
+    }
 
 })
 
-
-
-
-app.post('/api/posts',function(request, response, next){
-
-
-    console.log(request.body.username);
-    console.log(request.body.body);
-
-
-    var post = new Post({
-
-        username: request.body.username,
-        body: request.body.body
-
-    });
-
-    post.save(function(error, post){
-
-        if(error) {return next(error)}
-        response.status(201).json(post)
-    })
-
-});
-
-app.listen(8888);
+app.listen(3000, function () {
+    console.log('server listening on', 3000)
+})

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html ng-app='app'  lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='node_modules/bootstrap/dist/css/bootstrap.css'>
+</head>
+
+<body>
+
+<div ng-controller='PostsCtrl' class='container'>
+
+    <h1>Recent Posts</h1>
+
+    <form role='form'>
+
+        <div class='form-group'>
+
+            <div class="input-group">
+
+                <input ng-model="postBody" class='form-control'>
+
+            <span class='input-group-btn'>
+
+              <button ng-click='addPost()' class='btn btn-default'>Add Post</button>
+
+            </span>
+
+            </div>
+
+        </div>
+
+    </form>
+
+    <ul class='list-group'>
+
+        <li ng-repeat='post in posts' class='list-group-item'>
+
+            <strong>@{{ post.username }}</strong>
+
+            <span>{{ post.body }}</span>
+
+        </li>
+
+    </ul>
+
+</div>
+
+
+<script src='node_modules/angular/angular.js'></script>
+
+
+<script>
+
+    var app = angular.module('app', [])
+
+
+    app.controller('PostsCtrl', function ($scope) {
+
+        $scope.addPost = function () {
+
+            if ($scope.postBody) {
+
+                $scope.posts.unshift({
+
+                    username: 'erlend',
+                    body: $scope.postBody
+
+                })
+
+                $scope.postBody = null
+            }
+        }
+
+        $scope.posts = [
+            {
+                username: 'erlendw',
+                body: 'beh'
+            },
+            {
+                username: 'erlend øst',
+                body: 'leeeeeeee roy j'
+            }
+        ]
+    })
+</script>
+</body>
+</html>
