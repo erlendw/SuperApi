@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel='stylesheet' href='node_modules/bootstrap/dist/css/bootstrap.css'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 </head>
 
 <body>
@@ -40,7 +40,7 @@
 
             <strong>@{{ post.username }}</strong>
 
-            <span>{{ post.body }}</span>
+            <span>{{ post.post }}</span>
 
         </li>
 
@@ -49,7 +49,7 @@
 </div>
 
 
-<script src='node_modules/angular/angular.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js'></script>
 
 
 <script>
@@ -57,7 +57,7 @@
     var app = angular.module('app', [])
 
 
-    app.controller('PostsCtrl', function ($scope) {
+    app.controller('PostsCtrl', function ($scope, $http) {
 
         $scope.addPost = function () {
 
@@ -74,7 +74,13 @@
             }
         }
 
-        $scope.posts = [
+        $http.get('http://localhost:3000/api/posts').success(function(posts){
+
+            $scope.posts = posts
+
+        })
+
+        /*$scope.posts = [
             {
                 username: 'erlendw',
                 body: 'beh'
@@ -83,7 +89,7 @@
                 username: 'erlend øst',
                 body: 'leeeeeeee roy j'
             }
-        ]
+        ]*/
     })
 </script>
 </body>
